@@ -4,7 +4,9 @@
 namespace App\Http\Controllers;
 
 
-class MainController
+class MainController extends Controller
 {
-
+    public function index(){
+        echo 'Приветсвие пользователя';
+    }
 }
