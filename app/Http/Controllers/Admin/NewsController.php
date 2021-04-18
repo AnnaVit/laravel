@@ -12,6 +12,7 @@ class NewsController extends Controller
     public function index()
     {
         echo 'Hello';
+
     }
 
     public function create()
@@ -29,4 +30,5 @@ class NewsController extends Controller
         echo 'I,m delete';
     }
 }
+
 
