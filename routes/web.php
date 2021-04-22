@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\NewsController;
 use \App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\MainController;
-use \App\Http\Controllers\Test;
+
 
 
 /*
@@ -17,6 +17,7 @@ d. Страницу вывода конкретной новости.
 Route::get('/', [MainController::class, 'index']);
 
 
+
 /** Админка новостей */
 Route::group([
     'prefix' => '/admin/news',
@@ -26,10 +27,16 @@ Route::group([
         ->name('index' );
     Route::get('/create', [ AdminNewsController::class, 'create'])
         ->name('create');
+    Route::post('/save', [ AdminNewsController::class, 'save'])
+        ->name('save');
     Route::get('/update', [ AdminNewsController::class, 'update'])
         ->name('update');
     Route::get('/delete', [ AdminNewsController::class, 'delete'])
         ->name('delete');
+    Route::get('/categoryAdd', [ AdminNewsController::class, 'categoryAdd'])
+        ->name('categoryAdd');
+    Route::post('/category', [ AdminNewsController::class, 'addCategory'])
+        ->name('category');
 });
 /**Категории*/
 
@@ -41,32 +48,11 @@ Route::group([
     Route::get('/', [NewsController::class, 'categories'])
         ->name('');
 
-    Route::get('/{nameCategory}', [NewsController::class,'news'])
-        ->name('::nameCategory');
+    Route::get('/{idCategory}', [NewsController::class,'news'])
+        ->name('::idCategory');
 
-    Route::get('/{nameCategory}/{id}', [NewsController::class,'article'])
-        ->name('::nameCategory::id');
+    Route::get('/{idCategory}/{id}', [NewsController::class,'article'])
+        ->name('::idCategory::id');
 });
 
 
-/*
- * Route внутри route
- * */
-
-
-Route::group([
-    'prefix' => '/test',
-    'as' => 'test'
-
-], function() {
-    Route::get('/', [Test::class, 'test'])
-        ->name('');
-
-    Route::group([
-        'prefix' => '/test2',
-        'as' => 'test2'
-    ], function(){
-        Route::get('/',[Test::class, 'test2'])
-            ->name('');
-    });
-});
