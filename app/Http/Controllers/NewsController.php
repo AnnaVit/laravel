@@ -10,7 +10,7 @@ class NewsController extends Controller
 {
 
 
-    private $categories = [
+    public $categories = [
         1 => 'Здоровье',
         2 => 'IT',
         3 => 'Спорт',
@@ -38,5 +38,10 @@ class NewsController extends Controller
         $article = (new News())->getArticle($id);
         return view('news.article', ['article' => $article]);
 
+    }
+
+    public function allCategories()
+    {
+        return $this->categories;
     }
 }
